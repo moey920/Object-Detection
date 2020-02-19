@@ -1,6 +1,3 @@
-# -*- coding:utf-8 -*-
-# !/usr/bin/env python
- 
 import argparse
 import json
 import matplotlib.pyplot as plt
@@ -21,7 +18,7 @@ class MyEncoder(json.JSONEncoder):
             return obj.tolist()
         else:
             return super(MyEncoder, self).default(obj)
- 
+
 class labelme2coco(object):
     def __init__(self, labelme_json=[], save_json_path='./tran.json'):
         '''
@@ -77,7 +74,7 @@ class labelme2coco(object):
  
     def categorie(self, label):
         categorie = {}
-        categorie['supercategory'] = 'Cancer'
+        categorie['supercategory'] = 'Receipt'
         categorie['id'] = len(self.label) + 1  # 0 묵시적 배경
         categorie['name'] = label
         return categorie
@@ -156,7 +153,8 @@ class labelme2coco(object):
         json.dump(self.data_coco, open(self.save_json_path, 'w'), indent=4, cls=MyEncoder)  # indent=4 더 보기 좋게 표시
  
  
-labelme_json = glob.glob('./Annotations/*.json')
+labelme_json = glob.glob('C:/Users/Cashcow005/Desktop/Object-Detection/images/annotation/train/001.json')
 # labelme_json=['./Annotations/*.json']
  
-labelme2coco(labelme_json, './json/test.json')
+labelme2coco(labelme_json, 'C:/Users/Cashcow005/Desktop/Object-Detection/images/annotation/train/coco/test.json')
+#labelme2coco(labelme_json, './json/test.json')
